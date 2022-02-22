@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Product>
+
+@{
+    ViewData["Title"] = "Core Bar Coffee Shop";
+}
+
+<h2 align="center">Core View Bar</h2>
+<p></p>
+<p></p>
+<p></p>
+<div align="center">
+    <div class="d-flex justify-content-around">
+        @foreach (var item in Model)
+        {
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" width="50%" alt="@item.ProductName" src="@item.ProductImageURL">
+                <div class="card-body">
+                    <h5 class="card-title align-center">@item.ProductName</h5>
+                    <p class="card-text">@item.ProductDescription</p>
+                    <a class="btn btn-success align-center text-white" asp-controller="Orders" asp-action="AddToShopBag" asp-route-id="@item.ID"><i class="bi bi-eye-fill"></i> Add to Cart (@item.ProductPrice €)</a>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+

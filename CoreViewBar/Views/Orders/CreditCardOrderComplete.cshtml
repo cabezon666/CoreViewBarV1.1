@@ -1,0 +1,52 @@
+﻿@using CoreViewBar.Data.ViewModels;
+@*@model PaymentVM*@
+@using System.Linq
+@{
+    ViewData["Title"] = "Credit Card Payment Complete!";
+}
+
+<h2 align="center">Here is the bill paid with Credit Card:</h2>
+
+
+
+<table class="table table-sm" align="center" style="width:50%">
+    <thead>
+        <tr>
+            <th>Quantity</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Subtotal</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ShopBagValues)
+        {
+            <tr>
+                <td class="align-middle">@item.Amount</td>
+                <td class="align-middle">@item.Product.ProductName</td>
+                <td class="align-middle">@item.Product.ProductPrice€ </td>
+                <td class="align-middle">@((item.Amount*item.Product.ProductPrice).ToString("c"))€</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2"></td>
+            <td><b>Total:</b></td>
+            <td>
+                @Math.Round(Model.ShopBagTotal, 2) at @Math.Round(Model.Discount * 100, 2) % = @Math.Round((Model.ShopBagTotal * ((decimal)(1 - Model.Discount))),2)€
+            </td>
+            <td></td>
+        </tr>
+    </tfoot>
+</table>
+<h2 align="center">Thank you</h2>
+<p></p>
+<p></p>
+<p></p>
+<div align="center">
+    <a class="btn btn-primary btn-lg align-center" asp-controller="Products" asp-action="Index">
+        Return
+    </a>
+</div>
